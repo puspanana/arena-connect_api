@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['Customer', 'Admin Lapangan', 'Admin Aplikasi'])->default('Customer');
             $table->rememberToken();
             $table->timestamps();
         });

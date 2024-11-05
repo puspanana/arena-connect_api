@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class FieldCentre extends Model
 {
     use HasFactory;
-    protected $fillable = ["name", "address", "maps", "facility", "phone_number", "rating"];
+    protected $fillable = ["user_id", "facility_id", "name", "address", "maps", "phone_number", "rating", "images"];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function facility()
+    {
+        return $this->belongsTo(Facility::class);
+    }
 }
