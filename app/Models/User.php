@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'password',
+        'role',
     ];
 
     /**
@@ -43,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function field_centre()
+    {
+        return $this->hasOne(FieldCentre::class);
+    }
 }

@@ -14,27 +14,32 @@ return new class extends Migration
     {
         Schema::create('field_centres', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->cascadeOnUpdate();
             $table->string("name");
             $table->string("address");
             $table->string("maps");
-            $table->string("facility");
             $table->string("phone_number");
+            $table->longText("facilities");
             $table->integer("rating");
+            $table->json('images')->nullable();
             $table->timestamps();
         });
 
-        $faker = \Faker\Factory::create();;
+        // $faker = \Faker\Factory::create();;
 
-        for ($i = 0; $i < 10; $i++) {
-            FieldCentre::create([
-                'name' => $faker->company,
-                'address' => $faker->address,
-                'maps' => 'https://maps.google.com/?q=' . $faker->latitude . ',' . $faker->longitude,
-                'facility' => $faker->words(3, true),
-                'phone_number' => $faker->phoneNumber,
-                'rating' => $faker->numberBetween(1, 5),
-            ]);
-        }
+        // for ($i = 0; $i < 10; $i++) {
+        //     FieldCentre::create([
+        //         // 'user_id' => $faker->numberBetween(3, 4),
+        //         'address' => $faker->address,
+        //         'name' => $faker->company,
+        //         'maps' => "https://maps.google.com/?q={$faker->latitude},{$faker->longitude}",
+        //         'phone_number' => $faker->phoneNumber,
+        //         'rating' => $faker->numberBetween(1, 5),
+        //     ]);
+        // }
     }
 
     /**
