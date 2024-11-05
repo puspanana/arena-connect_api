@@ -58,11 +58,11 @@ class FieldCentreController extends Controller
         }
 
         $add_field_centres->user_id = $request->user_id;
-        $add_field_centres->facilities = $request->facilities;
         $add_field_centres->name = $request->name;
         $add_field_centres->address = $request->address;
         $add_field_centres->maps = $request->maps;
         $add_field_centres->phone_number = $request->phone_number;
+        $add_field_centres->facilities = $request->facilities;
         $add_field_centres->rating = $request->rating;
         $add_field_centres->images = json_encode($imagePaths);
 
