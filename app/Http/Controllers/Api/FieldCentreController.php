@@ -31,6 +31,8 @@ class FieldCentreController extends Controller
         $rules = [
             'user_id' => 'required',
             'name' => 'required',
+            'descriptions' => 'required',
+            'rules' => 'required',
             'address' => 'required',
             'maps' => 'required',
             'phone_number' => 'required',
@@ -59,6 +61,8 @@ class FieldCentreController extends Controller
 
         $add_field_centres->user_id = $request->user_id;
         $add_field_centres->name = $request->name;
+        $add_field_centres->descriptions = $request->descriptions;
+        $add_field_centres->rules = $request->rules;
         $add_field_centres->address = $request->address;
         $add_field_centres->maps = $request->maps;
         $add_field_centres->phone_number = $request->phone_number;

@@ -19,6 +19,8 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnUpdate();
             $table->string("name");
+            $table->longText("descriptions");
+            $table->longText("rules");
             $table->string("address");
             $table->string("maps");
             $table->string("phone_number");
