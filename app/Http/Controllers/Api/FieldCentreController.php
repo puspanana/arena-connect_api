@@ -36,8 +36,9 @@ class FieldCentreController extends Controller
             'address' => 'required',
             'maps' => 'required',
             'phone_number' => 'required',
+            'price_from' => 'required',
             'facilities' => 'required',
-            'rating' => 'required|integer',
+            'rating' => 'required|numeric|min:0|max:5',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
@@ -55,7 +56,7 @@ class FieldCentreController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('images', 'public');
-                $imagePaths[] = $path;
+                $imagePaths[] = url('storage/' . $path);
             }
         }
 
@@ -66,9 +67,10 @@ class FieldCentreController extends Controller
         $add_field_centres->address = $request->address;
         $add_field_centres->maps = $request->maps;
         $add_field_centres->phone_number = $request->phone_number;
+        $add_field_centres->price_from = $request->price_from;
         $add_field_centres->facilities = $request->facilities;
         $add_field_centres->rating = $request->rating;
-        $add_field_centres->images = json_encode($imagePaths);
+        $add_field_centres->images = json_encode($imagePaths, true);
 
         $add_field_centres->save();
 

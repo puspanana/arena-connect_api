@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FieldCentre extends Model
 {
     use HasFactory;
-    protected $fillable = ["user_id", "name", "descriptions", "rules", "address", "maps", "phone_number", "facilities", "rating", "images"];
+    protected $fillable = ["user_id", "name", "descriptions", "rules", "address", "maps", "phone_number", "price_from", "facilities", "rating", "images"];
 
     public function user()
     {
