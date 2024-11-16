@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string("maps");
             $table->string("phone_number");
             $table->decimal("price_from", 8, 2);
-            $table->longText("facilities");
+            // $table->longText("facilities");
             $table->float('rating', 2, 1)->default(0);
             $table->json('images')->nullable();
             $table->timestamps();

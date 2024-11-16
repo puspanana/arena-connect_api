@@ -14,12 +14,23 @@ class FieldCentreController extends Controller
      */
     public function index()
     {
-        $field_centres = FieldCentre::all();
-        return response()->json([
-            'success' => true,
-            'message' => 'Successfully get data on Sports Field Centres',
-            'data' => $field_centres,
-        ], 200);
+        try {
+            $field_centres = FieldCentre::with(['facilities' => function ($query) {
+                $query->select('facilities.name');
+            }])->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully get data on Sports Field Centres',
+                'data' => $field_centres,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to get data on Sports Field Centres',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -37,7 +48,9 @@ class FieldCentreController extends Controller
             'maps' => 'required',
             'phone_number' => 'required',
             'price_from' => 'required',
-            'facilities' => 'required',
+            // 'facilities' => 'required',
+            'facility_ids' => 'required|array',
+            'facility_ids.*' => 'exists:facilities,id',
             'rating' => 'required|numeric|min:0|max:5',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
@@ -68,26 +81,47 @@ class FieldCentreController extends Controller
         $add_field_centres->maps = $request->maps;
         $add_field_centres->phone_number = $request->phone_number;
         $add_field_centres->price_from = $request->price_from;
-        $add_field_centres->facilities = $request->facilities;
+        // $add_field_centres->facilities = $request->facilities;
         $add_field_centres->rating = $request->rating;
         $add_field_centres->images = json_encode($imagePaths, true);
 
         $add_field_centres->save();
+        $add_field_centres->facilities()->sync($request->facility_ids);
 
         return response()->json([
             'success' => true,
             'message' => 'Add new field centre successfully',
-            'data' => $add_field_centres,
+            'data' => $add_field_centres->load('facilities'),
         ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(FieldCentre $fieldCentre)
+    public function show($id)
     {
-        //
+        try {
+            $field_centre = FieldCentre::with(['user', 'facilities' => function ($query) {
+                $query->select('facilities.name');
+            }])->findOrFail($id);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully get detail data on Sports Field Centre',
+                'data' => $field_centre,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve field centre details',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+    /**
+     * Display the specified resource.
+     */
+
 
     /**
      * Update the specified resource in storage.
