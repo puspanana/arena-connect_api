@@ -2,9 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>Arena Connect - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Arena Connect - Where Games Begin!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
@@ -33,7 +36,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Arena<span>Connect</span></a>
+            <a class="navbar-brand" href="{{ url('/') }}">Arena<span>Connect</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -41,15 +44,27 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-                    <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Login</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Register</a></li>
+                    {{-- <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li> --}}
+                    {{-- <li class="nav-item"><a href="{{ url('/dashboard') }}" target="_blank"
+                            class="nav-link">Dashboard</a></li> --}}
+                    <li class="nav-item"><a href="about.html" class="nav-link">Tentang Kami</a></li>
+                    <li class="nav-item"><a href="pricing.html" class="nav-link">Harga</a></li>
+                    <li class="nav-item"><a href="car.html" class="nav-link">Pusat Lapangan</a></li>
+                    {{-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> --}}
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
+
+                    @if (Route::has('login'))
+                        @auth
+                            <li class="nav-item"><a href="{{ url('/dashboard') }}" target="_blank"
+                                    class="nav-link">Dashboard</a></li>
+                        @else
+                            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
+                            @if (Route::has('register'))
+                                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a></li>
+                            @endif
+                        @endauth
+                    @endif
+
                 </ul>
             </div>
         </div>
@@ -64,16 +79,16 @@
             <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
                 <div class="col-lg-8 ftco-animate">
                     <div class="text w-100 text-center mb-md-5 pb-md-5">
-                        <h1 class="mb-4">Fast &amp; Easy Way To Rent A Car</h1>
-                        <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with
-                            the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
+                        <h1 class="mb-4">Temukan Lapangan, Mulai Permainan!</h1>
+                        <p style="font-size: 18px;">Arena Connect adalah solusi terbaik untuk booking lapangan olahraga
+                            kapan saja, di mana saja. Mulai permainanmu sekarang!</p>
                         <a href="https://vimeo.com/45830194"
                             class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
                             <div class="icon d-flex align-items-center justify-content-center">
                                 <span class="ion-ios-play"></span>
                             </div>
                             <div class="heading-title ml-5">
-                                <span>Easy steps for renting a car</span>
+                                <span>Langkah mudah untuk booking lapangan</span>
                             </div>
                         </a>
                     </div>
@@ -189,8 +204,8 @@
                                             </p>
                                         </div>
                                         <p class="d-flex mb-0 d-block"><a href="#"
-                                                class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                                class="btn btn-secondary py-2 ml-1">Details</a></p>
+                                                class="btn btn-primary py-2 mr-1">Booking</a> <a href="#"
+                                                class="btn btn-secondary py-2 ml-1">Detail</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -260,18 +275,28 @@
                 </div>
                 <div class="col-md-6 wrap-about ftco-animate">
                     <div class="heading-section heading-section-white pl-md-5">
-                        <span class="subheading">About us</span>
+                        <span class="subheading">Tentang Kami</span>
                         <h2 class="mb-4">Welcome to Arena Connect</h2>
 
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
-                            It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it
-                            would have been rewritten a thousand times and everything that was left from its origin
-                            would be the word "and" and the Little Blind Text should turn around and return to its own,
-                            safe country. A small river named Duden flows by their place and supplies it with the
-                            necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly
-                            into your mouth.</p>
-                        <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+                        <p>
+                            Arena Connect hadir sebagai platform inovatif untuk memudahkan para pecinta olahraga
+                            menemukan
+                            dan memesan lapangan dengan cepat dan mudah. Dengan misi untuk menyatukan para pemain di
+                            berbagai arena, kami menghubungkan komunitas olahraga melalui teknologi yang praktis dan
+                            efisien.
+                        </p>
+
+                        <p>
+                            Kami percaya bahwa setiap pertandingan dimulai dari tempat yang tepat, itulah sebabnya kami
+                            menyediakan akses ke berbagai pilihan lapangan olahraga terbaik di lokasi yang strategis.
+                        </p>
+
+                        <p>
+                            Bersama Arena Connect, jadikan olahraga lebih mudah diakses, lebih menyenangkan, dan lebih
+                            terorganisir. Karena di sinilah permainan dimulai—<b>"Join the Arena Connect—Where Games
+                                Begin!"</b>
+                        </p>
+                        <p><a href="#" class="btn btn-primary py-3 px-4">Cari Lapangan</a></p>
                     </div>
                 </div>
             </div>
@@ -282,8 +307,8 @@
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Services</span>
-                    <h2 class="mb-3">Our Latest Services</h2>
+                    <span class="subheading">Layanan</span>
+                    <h2 class="mb-3">Layanan Terbaru Kami</h2>
                 </div>
             </div>
             <div class="row">
@@ -292,9 +317,10 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-wedding-car"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Wedding Ceremony</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
+                            <h3 class="heading mb-2">Booking Lapangan Online</h3>
+                            <p>Nikmati kemudahan memesan lapangan olahraga favoritmu langsung dari aplikasi. Pilih
+                                lokasi, waktu, dan jenis olahraga yang kamu inginkan, semuanya hanya dalam beberapa
+                                klik.</p>
                         </div>
                     </div>
                 </div>
@@ -303,9 +329,9 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-transportation"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">City Transfer</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
+                            <h3 class="heading mb-2">Informasi Jadwal dan Ketersediaan</h3>
+                            <p>Kami menawarkan sistem pembayaran yang cepat, aman, dan mudah. Fokuslah pada permainan,
+                                biarkan kami urus transaksinya!</p>
                         </div>
                     </div>
                 </div>
@@ -314,9 +340,9 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-car"></span></div>
                         <div class="text w-100">
-                            <h3 class="heading mb-2">Airport Transfer</h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
+                            <h3 class="heading mb-2">Rekomendasi Lapangan Terbaik</h3>
+                            <p>Bingung memilih? Kami menyediakan rekomendasi lapangan terbaik berdasarkan lokasi, harga,
+                                fasilitas, dan ulasan pengguna.</p>
                         </div>
                     </div>
                 </div>
@@ -540,7 +566,8 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
+                        <h2 class="ftco-heading-2"><a href="#" class="logo">Arena<span>Connect</span></a>
+                        </h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                             there live the blind texts.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
@@ -576,15 +603,15 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Punya Pertanyaan?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
-                                        Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2
-                                            392 3929 210</span></a></li>
+                                <li><span class="icon icon-map-marker"></span><span class="text">Jl. Prof. Soedarto,
+                                        Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+62
+                                            123 4567 890</span></a></li>
                                 <li><a href="#"><span class="icon icon-envelope"></span><span
-                                            class="text">info@yourdomain.com</span></a></li>
+                                            class="text">arenaconnect@gmail.com</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -610,12 +637,14 @@
 
 
     <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
                 stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
                 stroke-miterlimit="10" stroke="#F96D00" />
-        </svg></div>
+        </svg>
+    </div>
 
 
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
