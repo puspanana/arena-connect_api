@@ -13,7 +13,21 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $facilities = Facility::all();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully get data on facilities',
+                'data' => $facilities,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to get data on facilities',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
