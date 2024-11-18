@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\FieldCentreController;
+use App\Http\Controllers\Api\FacilityController;
+use App\Http\Controllers\Api\FieldController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +31,9 @@ Route::get('/', function () {
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::resource('field_centres', FieldCentreController::class)->middleware('auth:sanctum');
+
+// Untuk Field Centres
+Route::resource('field-centres', FieldCentreController::class);
+Route::resource('facilities', FacilityController::class);
+Route::resource('fields', FieldController::class);
+Route::get('/field-centres/{fieldCentreId}/fields', [FieldController::class, 'indexByFieldCentre']);

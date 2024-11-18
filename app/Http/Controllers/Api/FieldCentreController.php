@@ -17,7 +17,7 @@ class FieldCentreController extends Controller
         try {
             $field_centres = FieldCentre::with(['facilities' => function ($query) {
                 $query->select('facilities.name');
-            }])->get();
+            }, 'fields'])->get();
 
             return response()->json([
                 'success' => true,
