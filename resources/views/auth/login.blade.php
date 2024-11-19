@@ -13,14 +13,32 @@
                                 <h4>Arena Connect</h4>
                             </a>
 
-                            <form class="mt-5 mb-5 login-input">
+                            <form class="mt-5 mb-5 login-input" method="POST" action="{{ route('login') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email" autofocus
+                                        placeholder="Masukkan email Anda">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="current-password" placeholder="Masukkan password Anda">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <button class="btn login-form__btn submit w-100">Sign In</button>
+                                <button class="btn login-form__btn w-100" type="submit">Masuk</button>
                             </form>
                             <p class="mt-5 login-form__footer">Belum punya akun? <a href="{{ url('/register') }}"
                                     class="text-primary">Register</a> sekarang</p>
