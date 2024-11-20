@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FieldCentreController;
 use App\Http\Controllers\Api\FacilityController;
 use App\Http\Controllers\Api\FieldController;
@@ -37,3 +38,4 @@ Route::resource('field-centres', FieldCentreController::class);
 Route::resource('facilities', FacilityController::class);
 Route::resource('fields', FieldController::class);
 Route::get('/field-centres/{fieldCentreId}/fields', [FieldController::class, 'indexByFieldCentre']);
+Route::resource('bookings', BookingController::class);
