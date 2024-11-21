@@ -36,8 +36,8 @@ class FieldController extends Controller
         try {
             $fields = Field::where('field_centre_id', $fieldCentreId)
                 ->with([
-                    'prices:field_id,price_from,price_to',
-                    'schedules:field_id,date,start_time,end_time,is_booked',
+                    'prices:id,field_id,price_from,price_to',
+                    'schedules:id,field_id,date,start_time,end_time,is_booked',
                     'fieldCentre:name,id'
                 ])
                 ->get();
