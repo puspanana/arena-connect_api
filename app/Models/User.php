@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(FieldCentre::class);
     }
+    
+    public function booking()
+    {
+        return $this->hasOne(Booking::class);
+    }
 }

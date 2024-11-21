@@ -25,4 +25,9 @@ class Field extends Model
     {
         return $this->hasMany(FieldSchedule::class, 'field_id', 'id');
     }
+
+    public function booking()
+    {
+        return $this->hasOne(Booking::class);
+    }
 }
