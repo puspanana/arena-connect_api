@@ -38,4 +38,6 @@ Route::resource('field-centres', FieldCentreController::class);
 Route::resource('facilities', FacilityController::class);
 Route::resource('fields', FieldController::class);
 Route::get('/field-centres/{fieldCentreId}/fields', [FieldController::class, 'indexByFieldCentre']);
+
+// Untuk Bookings
 Route::resource('bookings', BookingController::class);
