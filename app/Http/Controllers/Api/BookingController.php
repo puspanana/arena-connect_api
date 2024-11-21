@@ -44,7 +44,39 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $add_booking = new Booking();
+        $rules = [
+            'user_id' => 'required',
+            'field_id' => 'required',
+            'booking_start' => 'required',
+            'booking_end' => 'required',
+            'date' => 'required|date',
+            'cost' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'data' => $validator->errors(),
+            ], 422);
+        }
+
+        $add_booking->user_id = $request->user_id;
+        $add_booking->field_id = $request->field_id;
+        $add_booking->booking_start = $request->booking_start;
+        $add_booking->booking_end = $request->booking_end;
+        $add_booking->date = $request->date;
+        $add_booking->cost = $request->cost;
+
+        $add_booking->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Add new booking successfully',
+            'data' => $add_booking,
+        ], 201);
     }
 
     /**
