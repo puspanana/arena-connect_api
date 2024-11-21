@@ -49,6 +49,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(FieldCentre::class);
     }
+
+    public function payments()
+    {
+        return $this->hasOne(Payments::class);
+    }
     
     public function booking()
     {

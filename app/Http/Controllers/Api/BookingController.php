@@ -44,7 +44,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $add_bookings = new Booking();
+        $add_booking = new Booking();
         $rules = [
             'user_id' => 'required',
             'field_id' => 'required',
@@ -63,19 +63,19 @@ class BookingController extends Controller
             ], 422);
         }
 
-        $add_bookings->user_id = $request->user_id;
-        $add_bookings->field_id = $request->field_id;
-        $add_bookings->booking_start = $request->booking_start;
-        $add_bookings->booking_end = $request->booking_end;
-        $add_bookings->date = $request->date;
-        $add_bookings->cost = $request->cost;
+        $add_booking->user_id = $request->user_id;
+        $add_booking->field_id = $request->field_id;
+        $add_booking->booking_start = $request->booking_start;
+        $add_booking->booking_end = $request->booking_end;
+        $add_booking->date = $request->date;
+        $add_booking->cost = $request->cost;
 
-        $add_bookings->save();
+        $add_booking->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Add new booking successfully',
-            'data' => $add_bookings,
+            'data' => $add_booking,
         ], 201);
     }
 
