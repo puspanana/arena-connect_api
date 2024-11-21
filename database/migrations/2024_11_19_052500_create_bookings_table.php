@@ -21,8 +21,8 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('fields')
                 ->cascadeOnUpdate();
-            $table->time('booking-start');
-            $table->time('booking-end');
+            $table->time('booking_start');
+            $table->time('booking_end');
             $table->date('date');
             $table->decimal('cost', 8, 2);
             $table->timestamps();
