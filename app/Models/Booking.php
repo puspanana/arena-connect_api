@@ -20,4 +20,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Field::class);
     }
+
+    public function payments()
+    {
+        return $this->hasOne(Payments::class);
+    }
 }

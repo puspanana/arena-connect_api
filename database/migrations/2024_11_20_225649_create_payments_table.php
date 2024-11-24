@@ -17,10 +17,10 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('users')
                 ->cascadeOnUpdate();
-            // $table->foreignId('booking_id')
-            //     ->nullable()
-            //     ->constrained('booking')
-            //     ->cascadeOnUpdate();
+            $table->foreignId('booking_id')
+                ->nullable()
+                ->constrained('bookings')
+                ->cascadeOnUpdate();
             // $table->foreignId('sparring_id')
             //     ->nullable()
             //     ->constrained('sparring')
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->enum('status', ['belum', 'proses', 'selesai']);
             $table->char('order_id', length: 45);
             $table->char('receipt', length: 45);
-            $table->dateTime('date', precision: 0);
+            $table->date('date');
             $table->timestamps();
         });
     }
